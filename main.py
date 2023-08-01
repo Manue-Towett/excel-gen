@@ -27,8 +27,6 @@ def read_file(path: str) -> pd.DataFrame:
 
     df = df.dropna()
 
-    df = df.drop_duplicates()
-
     logger.info("Products found: {}".format(len(df)))
 
     return df
@@ -40,16 +38,22 @@ def generate_df(dfs: list[pd.DataFrame]) -> pd.DataFrame:
     df = pd.concat(dfs)
 
     products = []
+    crawled = []
 
     df_list = df.drop_duplicates().to_dict("records")
 
     for product in df_list:
+        if product["Title"] in crawled:
+            continue
+
         products.append({
             "Title": product["Title"],
             "Title_link": product["Title_link"],
             "Thumbnail": product["Thumbnail"],
             "Price": product["Price"]
         })
+
+        crawled.append(product["Title"])
     
     logger.info("Unique products found: {}".format(len(products)))
 
