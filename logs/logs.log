@@ -1,0 +1,17 @@
+Excel Generator:INFO - Excel generator started
+Excel Generator:INFO - Finding excel files in >> ./inputs/
+Excel Generator:INFO - Files found: 5
+Excel Generator:INFO - Reading file >> ./inputs/2023-7-24-10-12-10-1079671821282200-Search-ScrapingData-ScrapeStorm (1).xlsx
+Excel Generator:INFO - Products found: 20
+Excel Generator:INFO - Reading file >> ./inputs/2023-7-24-10-1-47-1079050240709499-friday special - Swanson®-ScrapingData-ScrapeStorm (1).xlsx
+Excel Generator:INFO - Products found: 24
+Excel Generator:INFO - Reading file >> ./inputs/2023-7-24-22-55-39-1125481131385200-Specials!-ScrapingData-ScrapeStorm (1).xlsx
+Excel Generator:INFO - Products found: 47
+Excel Generator:INFO - Reading file >> ./inputs/2023-7-24-10-48-37-1081858426558699-Specials!-ScrapingData-ScrapeStorm (1).xlsx
+Excel Generator:INFO - Products found: 169
+Excel Generator:INFO - Reading file >> ./inputs/2023-7-24-10-15-22-1079863999385699-Vitamins & Supplements - 0-5 m-ScrapingData-ScrapeStorm (1).xlsx
+Excel Generator:INFO - Products found: 112
+Excel Generator:INFO - Generating unique products...
+Excel Generator:INFO - Unique products found: 372
+Excel Generator:INFO - Saving data retrieved to excel...
+Excel Generator:INFO - Results saved to >> results_2023-08-01.xlsx
