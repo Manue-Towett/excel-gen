@@ -25,8 +25,6 @@ def read_file(path: str) -> pd.DataFrame:
 
     df = pd.read_excel(path)
 
-    df = df.dropna()
-
     logger.info("Products found: {}".format(len(df)))
 
     return df
@@ -54,8 +52,6 @@ def generate_df(dfs: list[pd.DataFrame]) -> pd.DataFrame:
         })
 
         crawled.append(product["Title"])
-    
-    logger.info("Unique products found: {}".format(len(products)))
 
     return pd.DataFrame(products)
 
@@ -75,7 +71,9 @@ def run() -> None:
     for file in files:
         dataframes.append(read_file(INPUT_PATH + file))
     
-    final_df = generate_df(dataframes)
+    final_df = generate_df(dataframes).dropna()
+
+    logger.info("Unique products found: {}".format(len(final_df)))
 
     logger.info("Saving data retrieved to excel...")
 
