@@ -11,7 +11,7 @@
 - Navigate to the project folder on command prompt
 - If running for the first time, install dependencies using:
     
-    ```pip install requirements.txt```
+    ```pip install -r requirements.txt```
 
 - Use the configuration file in settings to give the input and output paths
 - Run the script using the command:
