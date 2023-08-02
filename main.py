@@ -1,3 +1,4 @@
+import re
 import os
 import configparser
 from datetime import date
@@ -18,6 +19,23 @@ with open("./settings/settings.ini", "r") as file:
 OUTPUT_PATH = CONFIG.get("paths", "output")
 
 INPUT_PATH = CONFIG.get("paths", "input")
+
+def get_headers(data: dict[str, str]) -> dict[str, str]:
+    mappings = {
+        "title": "",
+        "title_link": "",
+        "thumbnail": "",
+        "price": ""
+    }
+
+    for key in list(mappings.keys()):
+        for new_key in list(data.keys()):
+            if re.match(key, new_key, re.I):
+                mappings[key] = new_key
+
+                break
+
+    return mappings
 
 def read_file(path: str) -> pd.DataFrame:
     """Reads an excel file and returns a dataframe"""
@@ -40,18 +58,20 @@ def generate_df(dfs: list[pd.DataFrame]) -> pd.DataFrame:
 
     df_list = df.drop_duplicates().to_dict("records")
 
+    mappings = get_headers(df_list[0])
+
     for product in df_list:
-        if product["Title"] in crawled:
+        if product[mappings["title"]] in crawled:
             continue
 
         products.append({
-            "Title": product["Title"],
-            "Title_link": product["Title_link"],
-            "Thumbnail": product["Thumbnail"],
-            "Price": product["Price"]
+            "Title": product[mappings["title"]],
+            "Title_link": product[mappings["title_link"]],
+            "Thumbnail": product[mappings["thumbnail"]],
+            "Price": product[mappings["price"]]
         })
 
-        crawled.append(product["Title"])
+        crawled.append(product[mappings["title"]])
 
     return pd.DataFrame(products)
 
