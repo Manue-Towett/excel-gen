@@ -71,7 +71,9 @@ def run() -> None:
     for file in files:
         dataframes.append(read_file(INPUT_PATH + file))
     
-    final_df = generate_df(dataframes).dropna()
+    df = generate_df(dataframes)
+
+    final_df = df[df["Title"].notna()]
 
     logger.info("Unique products found: {}".format(len(final_df)))
 
