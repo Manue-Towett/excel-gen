@@ -34,7 +34,7 @@ def get_headers(data: dict[str, str]) -> dict[str, str]:
                 mappings[key] = new_key
 
                 break
-
+    
     return mappings
 
 def read_file(path: str) -> pd.DataFrame:
@@ -42,6 +42,22 @@ def read_file(path: str) -> pd.DataFrame:
     logger.info("Reading file >> {}".format(path))
 
     df = pd.read_excel(path)
+
+    df_list = df.to_dict("records")
+
+    mappings = get_headers(df_list[0])
+
+    products = []
+
+    for product in df_list:
+        products.append({
+            "Title": product.get(mappings["title"]),
+            "Title_link": product.get(mappings["title_link"]),
+            "Thumbnail": product.get(mappings["thumbnail"]),
+            "Price": product.get(mappings["price"])
+        })
+    
+    df = pd.DataFrame(products)
 
     logger.info("Products found: {}".format(len(df)))
 
